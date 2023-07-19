@@ -45,9 +45,22 @@ class Visualizer:
     def _update_screen(self):
         self.screen.fill(self.settings.bg_color)
         self._draw_list()
+        self._draw_title()
         pygame.display.flip()
         
-        
+    def _draw_title(self):
+        title = self.settings.title_font.render(self.algo.algo_name, True, self.settings.font_color)
+        self.screen.blit(title, (self.screen_width/2 - title.get_width()/2, 5))
+
+
+        second_title =self.settings.title_font.render(f"{'-Ascending-' if self.ascending else '-Descending-'}",
+                                                      True, self.settings.font_color)
+
+        self.screen.blit(second_title, (self.screen_width/2 - second_title.get_width()/2, second_title.get_height() + 10))
+
+
+    
+    
     def _draw_list(self, swap_color={}, clear_bg=False):
         if clear_bg:
             clear_rect = (
@@ -83,24 +96,30 @@ class Visualizer:
             if event.type == pygame.QUIT:
                 sys.exit()
             
-            if event.type != pygame.KEYDOWN:
-                continue
+            if event.type == pygame.KEYDOWN:
+                self._check_keydown_event(event)
 
-            if event.key == pygame.K_SPACE and not self.start_sort:
-                self.start_sort = True
-                self.algo_generator = self.algo.algo_function(self.lst, self.ascending)
+
+    def _check_keydown_event(self, event):
+            if not self.start_sort:
+                if event.key == pygame.K_SPACE:
+                    self.start_sort = True
+                    self.algo_generator = self.algo.algo_function(self.lst, self.ascending)
             
-            elif event.key == pygame.K_r:
+                elif event.key == pygame.K_a:
+                    self.ascending = True
+            
+                elif event.key == pygame.K_d:
+                    self.ascending = False
+
+                elif event.key == pygame.K_i:
+                    self.algo.change_function("Insertion Sort", self.algo.insertion_sort)
+
+                elif event.key == pygame.K_b:
+                    self.algo.change_function("Bubble Sort", self.algo.bubble_sort)
+            if event.key == pygame.K_r:
                 self.lst = self.settings.set_list()
-    
                 self.start_sort = False
-            
-            elif event.key == pygame.K_a:
-                self.ascending = True
-            
-            elif event.key == pygame.K_d:
-                self.ascending = False
-
             
 if __name__ == "__main__":
     v = Visualizer()

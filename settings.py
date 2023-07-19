@@ -1,3 +1,4 @@
+import pygame
 import random
 import math
 
@@ -24,6 +25,9 @@ class Setting:
         
         self.swap_color1 = (0, 255, 0)
         self.swap_color2 = (255, 0, 0)
+
+        self.title_font = pygame.font.SysFont(None, 30)
+        self.font_color = (255, 255, 255)
 
     
     def set_list(self):
