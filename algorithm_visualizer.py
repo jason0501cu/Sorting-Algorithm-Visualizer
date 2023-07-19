@@ -117,6 +117,11 @@ class Visualizer:
 
                 elif event.key == pygame.K_b:
                     self.algo.change_function("Bubble Sort", self.algo.bubble_sort)
+
+                elif event.key == pygame.K_s:
+                    self.algo.change_function("Selection Sort", self.algo.selection_sort)
+
+            
             if event.key == pygame.K_r:
                 self.lst = self.settings.set_list()
                 self.start_sort = False

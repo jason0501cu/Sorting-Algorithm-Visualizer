@@ -12,7 +12,7 @@ class Setting:
         self.right_padding = 100
         self.top_padding = 100
 
-        self.num_in_list = 50
+        self.num_in_list = 100
         self.min_num = 0
         self.max_num = 100
         self.lst = self.set_list()
