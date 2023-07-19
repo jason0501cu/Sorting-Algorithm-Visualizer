@@ -22,6 +22,9 @@ class Setting:
             (204, 255, 255)
         ]
         
+        self.swap_color1 = (0, 255, 0)
+        self.swap_color2 = (255, 0, 0)
+
     
     def set_list(self):
         lst = self._generate_list()
