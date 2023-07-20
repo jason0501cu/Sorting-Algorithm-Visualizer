@@ -103,9 +103,8 @@ class Visualizer:
     def _check_keydown_event(self, event):
             if not self.start_sort:
                 if event.key == pygame.K_SPACE:
-                    self.start_sort = True
+                    self.start_sort = True 
                     self.algo_generator = self.algo.algo_function(self.lst, self.ascending)
-            
                 elif event.key == pygame.K_a:
                     self.ascending = True
             
@@ -120,6 +119,10 @@ class Visualizer:
 
                 elif event.key == pygame.K_s:
                     self.algo.change_function("Selection Sort", self.algo.selection_sort)
+                elif event.key == pygame.K_h:
+                    self.algo.change_function("Heap Sort", self.algo.heap_sort)
+                elif event.key == pygame.K_q:
+                    self.algo.change_function("Quick Sort", self.algo.quick_sort)
 
             
             if event.key == pygame.K_r:

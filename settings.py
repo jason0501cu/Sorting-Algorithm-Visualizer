@@ -7,7 +7,7 @@ class Setting:
         self.screen_width = 800
         self.screen_height = 600
         self.bg_color = 0, 0, 0 # black
-        self.fps = 60
+        self.fps = 120
         self.left_padding = 25
         self.right_padding = 100
         self.top_padding = 100
