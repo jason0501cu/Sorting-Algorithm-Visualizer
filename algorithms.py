@@ -1,3 +1,5 @@
+# include all the sorting algorithms in the programme
+
 class Algorithm:
     def __init__(self):
         self.algo_name = "Bubble Sort"
@@ -23,14 +25,15 @@ class Algorithm:
             j = i
 
             while j > 0:
-                sorting_cond = lst[j] < lst[j - 1] if ascending else lst[j] > lst[j - 1]
+                sorting_cond = lst[j] < lst[j -
+                                            1] if ascending else lst[j] > lst[j - 1]
                 if not sorting_cond:
                     break
                 else:
                     self._swap(j, j - 1, lst)
                 j -= 1
                 yield j + 1, j + 2
-    
+
     def selection_sort(self, lst, ascending=True):
         i = 0
         while i < len(lst) - 1:
@@ -39,61 +42,74 @@ class Algorithm:
                 sorting_cond = lst[target_idx] > lst[idx]if ascending else lst[target_idx] < lst[idx]
                 if sorting_cond:
                     target_idx = idx
+            
             self._swap(i, target_idx, lst)
             yield i, target_idx
+            
             i += 1
 
     def heap_sort(self, lst, ascending=True):
+        # for the convenience of visualization, the process of building heap,
+        # shifdown method and the soring are all in one function
+        
         # To start the heap sort, a heap is first built. If the sorting is in ascending order, a max-heap is built,
         # while for descending order sorting, a min-heap is built.
         first_parent_idx = (len(lst) - 2) // 2
         for current_idx in reversed(range(first_parent_idx + 1)):
-        # This block of code is the siftDown function, which adjusts the heap so that it maintains
-        # its property of being a max-heap (for ascending order sorting) or min-heap (for descending order sorting).
+            # This block of code is the siftDown function, which adjusts the heap so that it maintains
+            # its property of being a max-heap (for ascending order sorting) or min-heap (for descending order sorting).
             end_idx = len(lst) - 1
             child_one_idx = current_idx * 2 + 1
             while child_one_idx <= end_idx:
                 child_two_idx = current_idx * 2 + 2 if current_idx * 2 + 2 <= end_idx else -1
-                if child_two_idx > -1 and ((ascending and lst[child_two_idx] > lst[child_one_idx]) or 
-                                  (not ascending and lst[child_two_idx] < lst[child_one_idx])):
+                if child_two_idx > -1 and ((ascending and lst[child_two_idx] > lst[child_one_idx]) or
+                                           (not ascending and lst[child_two_idx] < lst[child_one_idx])):
                     idx_to_swap = child_two_idx
                 else:
                     idx_to_swap = child_one_idx
                 if (ascending and lst[idx_to_swap] > lst[current_idx]) or \
-                    (not ascending and lst[idx_to_swap] < lst[current_idx]):
-                    self._swap(current_idx, idx_to_swap, lst)  # Swap the values at the current index and the swap index.
-                    yield current_idx, idx_to_swap  # Generate a tuple of the current index and the swap index.
-                    current_idx = idx_to_swap  # Set the current index to the swap index for the next iteration.
-                    child_one_idx = current_idx * 2 + 1  # Recalculate the index of the first child node.
+                        (not ascending and lst[idx_to_swap] < lst[current_idx]):
+                    
+                    self._swap(current_idx, idx_to_swap, lst)
+                    yield current_idx, idx_to_swap
+                    
+                    current_idx = idx_to_swap
+                    child_one_idx = current_idx * 2 + 1
                 else:
                     break
 
         # After the heap has been built, the heap sort starts.
         for end_idx in reversed(range(1, len(lst))):
-            self._swap(0, end_idx, lst)  # Swap the root of the heap with the last node.
-            yield 0, end_idx  # Generate a tuple of the root index (0) and the end index.
+            
+            self._swap(0, end_idx, lst)
+            yield 0, end_idx
+
             # This block of code is the siftDown function, which ensures that the heap property is maintained
             # after the root and the last node have been swapped.
             current_idx = 0
             child_one_idx = current_idx * 2 + 1
             while child_one_idx <= end_idx - 1:
                 child_two_idx = current_idx * 2 + 2 if current_idx * 2 + 2 <= end_idx - 1 else -1
-                if child_two_idx > -1 and ((ascending and lst[child_two_idx] > lst[child_one_idx]) or 
-                                  (not ascending and lst[child_two_idx] < lst[child_one_idx])):
+                if child_two_idx > -1 and ((ascending and lst[child_two_idx] > lst[child_one_idx]) or
+                                           (not ascending and lst[child_two_idx] < lst[child_one_idx])):
                     idx_to_swap = child_two_idx
                 else:
                     idx_to_swap = child_one_idx
                 if (ascending and lst[idx_to_swap] > lst[current_idx]) or \
-                    (not ascending and lst[idx_to_swap] < lst[current_idx]):
-                    self._swap(current_idx, idx_to_swap, lst)  # Swap the values at the current index and the swap index.
-                    yield current_idx, idx_to_swap  # Generate a tuple of the current index and the swap index.
-                    current_idx = idx_to_swap  # Set the current index to the swap index for the next iteration.
-                    child_one_idx = current_idx * 2 + 1  # Recalculate the index of the first child node.
+                        (not ascending and lst[idx_to_swap] < lst[current_idx]):
+                    
+                    self._swap(current_idx, idx_to_swap, lst)
+                    yield current_idx, idx_to_swap
+                 
+                    current_idx = idx_to_swap
+                    child_one_idx = current_idx * 2 + 1
                 else:
                     break
 
-
     def quick_sort(self, lst, ascending=True):
+        # this implementation of quick sort algoritm does
+        # not have the best space comlexity in certain circumstances,
+        # but does not affect visualization
         stack = [(0, len(lst) - 1)]
 
         while stack:
@@ -122,13 +138,10 @@ class Algorithm:
                     yield low_idx, high_idx
                 else:
                     break
-            self._swap(start_idx, high_idx,lst)
+            self._swap(start_idx, high_idx, lst)
             yield start_idx, high_idx
 
             stack.extend(((start_idx, high_idx - 1), (high_idx + 1, end_idx)))
-            
-
-
 
     def _swap(self, i, j, lst):
         lst[i], lst[j] = lst[j], lst[i]
