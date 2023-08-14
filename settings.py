@@ -34,18 +34,18 @@ class Setting:
         self.button_width = 130
         self.button_height = 25
         self.button_x = self.screen_width - self.bar_width - 130
+        self.button_interval = self.button_height + 30
 
         self.speed_button_y = 100
+        self.ascending_button_y = self.speed_button_y + self.button_interval
+        self.descending_button_y = self.ascending_button_y + self.button_interval
 
-        self.bubble_sort_button_y = 200
+        self.bubble_sort_button_y = 300
         self.button_interval = self.button_height + 30
         self.selection_sort_button_y = self.bubble_sort_button_y + self.button_interval
         self.insertion_sort_button_y = self.selection_sort_button_y + self.button_interval
         self.heap_sort_button_y = self.insertion_sort_button_y + self.button_interval
         self.quick_sort_button_y = self.heap_sort_button_y + self.button_interval
-
-        self.ascending_button_y = self.quick_sort_button_y + self.button_interval
-        self.descending_button_y = self.ascending_button_y + self.button_interval
 
         self.exit_button_y = self.screen_height - 50
         self.start_button_y = self.exit_button_y - self.button_interval
