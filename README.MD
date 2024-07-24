@@ -2,15 +2,14 @@
 
 ## Introduction
 
-A small Python project done long ago during my early stage of learning Python.
-
-It visualizes the following algorithms:
+This is a small Python project created during my early stages of learning Python. It visualizes the following sorting algorithms using Pygame:
 
 1. Bubble Sort
 2. Selection Sort
 3. Insertion Sort
 4. Heap Sort
 5. Quick Sort
+
 
 ## Installation
 
